@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Model\User;
+use App\Models\User;
 use App\Interfaces\UserRepositoryInterface;
 
 class UserRepository implements UserRepositoryInterface
@@ -33,6 +33,11 @@ class UserRepository implements UserRepositoryInterface
     {
         // Find the user by ID
         return User::findOrFail($id);
+    }
+
+    public function getAll()
+    {
+        return User::all();
     }
 
     // Other methods...

@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('Name');
-            $table->string('ThumbImage');
-            $table->decimal('Price', 8, 2);
-            $table->text('Content');
+            // Modify the 'name' column definition in your migration file
+            $table->string('Name')->nullable();
+            $table->string('ThumbImage')->nullable();
+            $table->decimal('Price', 8, 2)->nullable();
+            $table->text('Content')->nullable();
             $table->unsignedBigInteger('CategoryID');
             $table->unsignedBigInteger('Author_ID');
-            $table->string('Author_Type');
+            $table->string('Author_Type')->nullable();
             $table->timestamps();
 
             // Add foreign key constraints

@@ -35,5 +35,6 @@ class ProductRepository implements ProductRepositoryInterface
     {
         return Product::all();
     }
+
     // Other methods specific to Product repository...
 }

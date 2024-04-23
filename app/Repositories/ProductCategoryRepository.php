@@ -31,5 +31,11 @@ class ProductCategoryRepository implements ProductCategoryRepositoryInterface
         return ProductCategory::findOrFail($id);
     }
 
+
+    public function getAll()
+    {
+        return ProductCategory::all();
+    }
+
     // Other methods specific to Product Category repository...
 }
