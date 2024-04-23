@@ -11,40 +11,164 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>Hello, world!</title>
+    <style>
+        body {
+            padding-top: 0;
+            font-size: 12px;
+            color: #777;
+            background: #f9f9f9;
+            font-family: 'Open Sans', sans-serif;
+            margin-top: 20px;
+        }
+
+        .panel {
+            position: relative;
+            background: #fff;
+        }
+
+        .image-wrapper {
+            position: relative;
+            display: block;
+            overflow: hidden;
+        }
+
+        .blog-container a:not(.btn) {
+            color: #999;
+            transition: all .2s linear;
+            -webkit-transition: all .2s linear;
+            -moz-transition: all .2s linear;
+            -ms-transition: all .2s linear;
+            -o-transition: all .2s linear;
+        }
+
+        .image-wrapper img {
+            transition: all .4s ease;
+            -webkit-transition: all .4s ease;
+            -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+            -o-transition: all .4s ease;
+        }
+
+        .image-wrapper:hover .image-overlay {
+            opacity: .9;
+            transition: all .4s ease;
+            -webkit-transition: all .4s ease;
+            -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+            -o-transition: all .4s ease;
+            transform: translateX(0%);
+            -webkit-transform: translateX(0%);
+            -moz-transform: translateX(0%);
+            -ms-transform: translateX(0%);
+            -o-transform: translateX(0%);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            background-color: #3c8dbc;
+            background-image: -moz-linear-gradient(top, #5fa4cc, #3c8dbc);
+            background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#5fa4cc), to(#3c8dbc));
+            background-image: -webkit-linear-gradient(top, #5fa4cc, #3c8dbc);
+            background-image: -o-linear-gradient(top, #5fa4cc, #3c8dbc);
+            background-image: linear-gradient(to bottom, #5fa4cc, #3c8dbc);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#5fa4cc, endColorstr=#3c8dbc, GradientType=0);
+            filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+            border: 6px solid #296282;
+            transition: all .4s ease;
+            -webkit-transition: all .4s ease;
+            -moz-transition: all .4s ease;
+            -ms-transition: all .4s ease;
+            -o-transition: all .4s ease;
+        }
+
+        .post-like {
+            float: right;
+            cursor: pointer;
+        }
+
+        .headline {
+            margin: 20px 0;
+            padding: 5px 0 10px;
+            border-bottom: 1px solid #eee;
+            font-weight: 500;
+        }
+
+        h4,
+        .h4 {
+            font-size: 18px;
+        }
+
+        .media,
+        .media-body {
+            overflow: hidden;
+            zoom: 1;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="album py-5 bg-light">
-        <div class="container">
-
-            <div class="row">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+    <div class="container bootstrap snippets bootdey">
+        <div class="row">
+            <h2 class="text-muted">Welcome to our blog</h2>
+            <hr>
+        </div>
+        <div class="row">
+            <!-- posts -->
+            <div class="col-md-8">
                 @foreach ($posts as $post)
-                    <div class="col-md-3">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top"
-                                data-src="holder.js/100px225?theme=thumb&amp;bg=55595c&amp;fg=eceeef&amp;text=Thumbnail"
-                                alt="Thumbnail [100%x225]" src="{{ $post->thumb_image }}" data-holder-rendered="true"
-                                style="height: 225px; width: 100%; display: block;">
-                            <div class="card-body">
-                                <p class="card-text">{{ $post->name }}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-
-                                    <small class="text-muted">${{ $post->author_type }}</small>
-                                    <small class="text-muted">{{ $post->created_at }}</small>
-                                </div>
-                            </div>
+                <div class="panel blog-container">
+                    <div class="panel-body">
+                        <div class="image-wrapper">
+                            <a class="image-wrapper image-zoom cboxElement" href="#">
+                                <img src="{{ $post->thumb_image }}" alt="Photo of Blog" width="700">
+                                <div class="image-overlay"></div>
+                            </a>
                         </div>
+
+                        <h4>{{ $post->name }}</h4>
+                        <small class="text-muted">By <a href="#"><strong> {{ $post->author_type }}</strong></a> | {{ $post->created_at }} </small>
+
+                        <p class="m-top-sm m-bottom-sm">
+                            {{ $post->description }}
+                        </p>
+                        <a class="text-primary" href="#"><i class="fa fa-angle-double-right"></i> Continue reading</a>
+                        <span class="post-like text-muted tooltip-test" data-toggle="tooltip"
+                            data-original-title="I like this post!">
+                            <i class="fa fa-heart"></i> <span class="like-count">{{ $post->author_id }}</span>
+                        </span>
                     </div>
+                </div>
+                @endforeach
+
+            </div>
+
+            <div class="col-md-4">
+                <h4 class="headline text-muted">
+                    POPULAR POST
+                    <span class="line"></span>
+                </h4>
+                @foreach ($posts as $post)
+                <div class="media popular-post">
+                    <a class="pull-left" href="#">
+                        <img src="{{ $post->thumb_image }}" alt="Popular Post" width="60" height="60">
+                    </a>
+                    <div class="media-body">
+                        {{ $post->name }}
+                    </div>
+                </div>
                 @endforeach
 
             </div>
         </div>
     </div>
+
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
