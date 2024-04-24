@@ -14,6 +14,8 @@ class Product extends Model
         'categoryid',
         'author_id',
         'author_type',
+        'created_at',
+        'updated_at',
         // Add other fillable attributes if necessary
     ];
 

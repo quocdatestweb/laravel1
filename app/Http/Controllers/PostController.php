@@ -1,27 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Repositories\PostRepository;
+use App\Repositories\PostCategoryRepository;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     protected $postRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepository $postRepository, PostCategoryRepository $postCategoryRepository)
     {
         $this->postRepository = $postRepository;
+        $this->postCategoryRepository = $postCategoryRepository;
     }
 
     public function index()
     {
-        // Retrieve all posts
-        $posts = $this->postRepository->getAll();
+        // Retrieve paginated posts using the query builder
+        $posts = Post::paginate(10);
+
+        $randomNumber = rand(1000, 9999);
 
         // Return the posts view with the retrieved posts
-        return view('posts.index', compact('posts'));
+        return view('posts.index', ['posts' => $posts, 'randomNumber' => $randomNumber]);
     }
+
 
     public function create()
     {
@@ -49,9 +54,11 @@ class PostController extends Controller
     {
         // Find the post by ID
         $post = $this->postRepository->find($id);
+        $categorys =  $this->postCategoryRepository->getAll();
+        $posts = $this->postRepository->getAll();
 
         // Return the post details view with the retrieved post
-        return view('posts.show', compact('post'));
+        return view('posts.detail', ['post' => $post,'posts' => $posts,'categorys' => $categorys,]);
     }
 
     public function edit($id)

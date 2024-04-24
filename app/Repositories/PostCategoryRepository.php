@@ -37,5 +37,9 @@ class PostCategoryRepository implements PostCategoryRepositoryInterface
         return PostCategory::findOrFail($id);
     }
 
+    public function getAll()
+    {
+        return PostCategory::all();
+    }
     // Other method implementations...
 }
