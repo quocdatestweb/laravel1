@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        $products = Product::with('category')->paginate(8);
+        $products = Product::with('category')->paginate(16);
         $categorys =  $this->productCategoryRepository->getAll();
         $users = $this->userRepository->getAll();
 
@@ -37,12 +37,12 @@ class ProductController extends Controller
 
     public function products_user()
     {
-        $products = Product::with('category')->paginate(8);
+        $products = Product::with('category')->paginate(16);
         $categorys =  $this->productCategoryRepository->getAll();
         $users = $this->userRepository->getAll();
 
 
-        return view('products.products_user', ['products' => $products,'categorys' => $categorys,'users' => $users]);
+        return view('products.products-user', ['products' => $products,'categorys' => $categorys,'users' => $users]);
     }
 
 
@@ -125,27 +125,10 @@ class ProductController extends Controller
         $product->created_at = $request->input('created_at');
         $product->updated_at = $request->input('created_at');
         $product->save();
-
-        return redirect()->route('products.index')->with('success', 'Sản phẩm đã được cập nhật thành công.');
+        return redirect()->route('products.edit', $product->id);
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     // Tìm sản phẩm cần cập nhật
-    //     $product = Product::findOrFail($id);
 
-    //     // Cập nhật các thông tin sản phẩm từ dữ liệu gửi lên từ biểu mẫu
-    //     $product->name = $request->input('name');
-    //     $product->price = $request->input('price');
-    //     $product->content = $request->input('content');
-    //     // Cập nhật các thông tin khác của sản phẩm tương ứng
-
-    //     // Lưu sản phẩm đã cập nhật vào cơ sở dữ liệu
-    //     $product->save();
-
-    //     // Redirect hoặc trả về phản hồi thành công
-    //     return redirect()->route('products.index')->with('success', 'Sản phẩm đã được cập nhật thành công.');
-    // }
     public function destroy($id)
     {
         // Delete the product using the repository

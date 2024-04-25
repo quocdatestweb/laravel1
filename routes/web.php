@@ -15,20 +15,28 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 
-Route::get('/posts', [PostController::class, 'index']);
-Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/', [ProductController::class, 'products_user'])->name('show');
 
-Route::get('/products', [ProductController::class, 'index'])->name('destroy');
-Route::get('/products_admin', [ProductController::class, 'index'])->name('product.admin');
-Route::get('/products_user', [ProductController::class, 'products_user'])->name('product.user');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('show');
-Route::get('/delete_product/{id}', [ProductController::class, 'destroy'])->name('destroy');
-Route::post('/delete_product/{id}', [ProductController::class, 'destroy'])->name('destroy');
+#Posts
+Route::get('/posts/user', [PostController::class, 'index']);
+Route::get('/posts/admin', [PostController::class, 'postadmin'])->name('posts.admin');
+Route::get('/posts/{id}', [PostController::class, 'show'])->name('showpost');
+Route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::post('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
+Route::put('/posts/edit/{id}', [PostController::class, 'update'])->name('posts.update');
+Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 
-Route::get('/edit_product/{id}', [ProductController::class, 'edit'])->name('edit');
+#Products
+Route::get('/products', [ProductController::class, 'index'])->name('products.destroy');
+Route::get('/products/admin', [ProductController::class, 'index'])->name('product.admin');
+Route::get('/products/user', [ProductController::class, 'products_user'])->name('product.user');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::post('products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
+Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
 
-
-Route::get('/', [ProductController::class, 'index']);
