@@ -19,11 +19,11 @@ Route::get('/', [ProductController::class, 'products_user'])->name('show');
 
 #Posts
 Route::get('/posts/user', [PostController::class, 'index']);
-Route::get('/posts/admin', [PostController::class, 'postadmin'])->name('posts.admin');
+Route::get('/posts/admin', [PostController::class, 'post_admin'])->name('posts.admin');
 Route::get('/posts/{id}', [PostController::class, 'show'])->name('showpost');
 Route::get('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
 Route::post('/posts/delete/{id}', [PostController::class, 'destroy'])->name('posts.destroy');
-Route::get('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
+Route::post('/posts/edit/{id}', [PostController::class, 'edit'])->name('posts.edit');
 Route::put('/posts/edit/{id}', [PostController::class, 'update'])->name('posts.update');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
 Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
@@ -36,7 +36,8 @@ Route::get('/products/{id}', [ProductController::class, 'show'])->name('products
 Route::get('/products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::post('products/delete/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('products.edit');
-Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+Route::put('/products/edit/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+Route::get('/products', [ProductController::class, 'search'])->name('products.search');
 

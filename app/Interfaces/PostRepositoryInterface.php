@@ -12,5 +12,6 @@ interface PostRepositoryInterface
 
     public function find($id);
 
+    public function getAll();
     // Other method declarations...
 }

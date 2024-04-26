@@ -51,6 +51,10 @@
 
                 <img src="https://images.fpt.shop/unsafe/fit-in/800x300/filters:quality(90):fill(white)/fptshop.com.vn/Uploads/Originals/2024/4/22/638493962838593257_F-H1_800x300.png"
                     alt="" srcset="" style="width: 100%">
+                    <form action="{{ route('products.search') }}" method="GET" class="d-flex pt-5">
+                        <input class="form-control me-2" type="search" name="search" placeholder="Search product..." aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
 
                 <!-- Button trigger modal -->
                 <div class="d-flex justify-content-end align-items-center pt-5">

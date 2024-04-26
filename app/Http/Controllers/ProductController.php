@@ -128,13 +128,20 @@ class ProductController extends Controller
         return redirect()->route('products.edit', $product->id);
     }
 
+    public function search(Request $request)
+    {
+        $search = $request->input('search');
 
+        $products = Product::where('Name', 'like', "%{$search}%")->paginate(16);
+
+        return view('products.search', compact('products', 'search'));
+    }
     public function destroy($id)
     {
         // Delete the product using the repository
         $this->productRepository->delete($id);
 
-        return redirect()->route('products.index');
+        return redirect()->route('product.admin');
 
     }
 }

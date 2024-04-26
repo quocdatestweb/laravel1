@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en">
 
@@ -10,48 +11,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Product</title>
-    <link rel="shortcut icon" href="https://cdn-icons-png.freepik.com/256/10112/10112502.png?semt=ais_hybrid"
-        type="image/vnd.microsoft.icon" />
+    <link rel="shortcut icon" href="https://cdn-icons-png.freepik.com/256/10112/10112502.png?semt=ais_hybrid" type="image/vnd.microsoft.icon" />
     <style>
         body {
             background: #eee;
         }
-
-        .shaking-element {
-            position: relative;
-            display: inline-block;
-        }
-
-        .shaking-element:hover {
-            animation: shake 0.4s;
-        }
-
-        @keyframes shake {
-            0% {
-                transform: translateX(0);
-            }
-
-            25% {
-                transform: translateX(-5px) rotate(-5deg);
-            }
-
-            75% {
-                transform: translateX(5px) rotate(5deg);
-            }
-
-            100% {
-                transform: translateX(0);
-            }
-        }
     </style>
+    <title>Product</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('show') }}">Home</a>
+                <a class="nav-link" href="{{route('show')}}">Home</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('product.user') }}">Show Product</a>
@@ -70,7 +43,6 @@
         </ul>
     </nav>
 
-
     <main role="main">
 
         <div class="Product py-5 bg-light">
@@ -84,43 +56,45 @@
                         <button class="btn btn-outline-success" type="submit">Search</button>
                       </form>
 
-                <div class="row pt-5">
-                    @foreach ($products as $product)
-                        <div class="col-md-3 shaking-element" >
-                            <a href="{{ route('products.show', ['id' => $product->id]) }}" style="text-decoration:none">
-                                <div class="card mb-4 box-shadow">
-                                    <img class="card-img-top" alt="Thumbnail [100%x225]"
-                                        src="{{ url('image/product/' . $product->ThumbImage) }}"
-                                        data-holder-rendered="true" style="height: 50%; width: 100%; display: block;">
-                                    <div class="card-body">
-                                        <p class="card-text text-secondary">{{ $product->Name }}</p>
-                                        <div class="star">
-                                            @php
-                                                $k = rand(1, 5);
-                                                // Alternatively, you can use: $k = Str::random();
-                                            @endphp
-                                            @for ($i = 1; $i <= $k; $i++)
-                                                <i class="fa fa-star text-warning"></i>
-                                            @endfor
-                                        </div>
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted"> {{ $product->category->name }}</small>
+                    <div class="row pt-5">
+                        @foreach ($products as $product)
+                            <div class="col-md-3 shaking-element" >
+                                <a href="{{ route('products.show', ['id' => $product->id]) }}" style="text-decoration:none">
+                                    <div class="card mb-4 box-shadow">
+                                        <img class="card-img-top" alt="Thumbnail [100%x225]"
+                                            src="{{ url('image/product/' . $product->ThumbImage) }}"
+                                            data-holder-rendered="true" style="height: 50%; width: 100%; display: block;">
+                                        <div class="card-body">
+                                            <p class="card-text text-secondary">{{ $product->Name }}</p>
+                                            <div class="star">
+                                                @php
+                                                    $k = rand(1, 5);
+                                                    // Alternatively, you can use: $k = Str::random();
+                                                @endphp
+                                                @for ($i = 1; $i <= $k; $i++)
+                                                    <i class="fa fa-star text-warning"></i>
+                                                @endfor
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <small class="text-muted"> {{ $product->category->name }}</small>
 
-                                            <h6 class="text-primary"><b>${{ $product->Price }}</b></h6>
+                                                <h6 class="text-primary"><b>${{ $product->Price }}</b></h6>
 
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-                        </div>
-                    @endforeach
+                                </a>
+                            </div>
+                        @endforeach
 
-                </div>
-                <div class="d-flex justify-content-end align-items-center">
-                    {{ $products->links('custom-pagination') }}
-                    {{-- <p>Trang hiện tại: {{ $products->currentPage() }}</p> --}}
-                </div>
+                    </div>
+                    <div class="d-flex justify-content-end align-items-center">
+                        {{ $products->links('custom-pagination') }}
+                        {{-- <p>Trang hiện tại: {{ $products->currentPage() }}</p> --}}
+                    </div>
             </div>
+
+        </div>
 
         </div>
 
@@ -129,7 +103,7 @@
     <footer class="text-muted">
         <div class="container">
             <p class="float-right">
-                <a>Back to top</a>
+                <a >Back to top</a>
             </p>
             <p>Product example is &copy; Bootstrap, but please download and customize it for yourself!</p>
             <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a
@@ -156,6 +130,26 @@
                 event.preventDefault(); // Ngăn chặn hành vi mặc định của sự kiện click
             }
         }
+        // Function to handle the image upload
+        function handleImageUpload() {
+            const fileInput = document.getElementById('imageUpload');
+            const previewImage = document.getElementById('previewImage');
+
+            // Check if a file is selected
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.style.display = 'block';
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        }
+
+        // Attach event listener to the file input
+        document.getElementById('imageUpload').addEventListener('change', handleImageUpload);
     </script>
 
 

@@ -32,7 +32,7 @@ class PostController extends Controller
         return view('posts.index', ['posts' => $posts, 'randomNumber' => $randomNumber]);
     }
 
-    public function postadmin()
+    public function post_admin()
     {
         // Retrieve paginated posts using the query builder
         $posts = Post::paginate(10);
@@ -125,6 +125,8 @@ class PostController extends Controller
          // Redirect to the post details page or wherever appropriate
         return redirect()->route('posts.edit', $post->id);
     }
+
+
 
     public function destroy($id)
     {

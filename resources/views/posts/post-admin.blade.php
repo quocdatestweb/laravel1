@@ -21,6 +21,11 @@
         body {
             background: #eee;
         }
+        .short-text {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
 
         .widget {
             position: relative;
@@ -301,7 +306,7 @@
                     <section class="widget">
                         <div class="widget-body">
                             <div class="widget-top-overflow text-white">
-                                <img src="{{ url('image/post/' . $post->thumb_image) }}" height="370">
+                                <img src="{{ url('image/post/' . $post->thumb_image) }}" height="370" width=100%>
                                 <ul class="tags text-white pull-right">
                                     <li><a>{{ $post->author_type }}</a></li>
                                     <li><a>{{ $post->category->name }}</a></li>
@@ -313,9 +318,9 @@
                                         alt="img new">
                                 </span>
                                 <h5 class="mb-xs mt-xs">
-                                    <a href="{{ route('showpost', ['id' => $post->id]) }}"
-                                        style="text-decoration:none">
-                                        <span class="fw-semi-bold">{{ $post->name }}</span>
+                                    <a href="{{ route('showpost', ['id' => $post->id]) }}" style="text-decoration:none">
+                                        <div class="fw-semi-bold short-text"
+                                            style="font-family: Arial; width: 400px; overflow: hidden; color: #252525;"><b>{{ $post->name }}</b></div>
                                     </a>
                                 </h5>
                                 <p class="fs-mini text-muted"><time><i class="fa fa-calendar"></i>
@@ -332,7 +337,7 @@
                                             onclick="confirmDelete(event)"><i
                                                 class="fa fa-trash text-danger"></i></button>
                                     </form>
-                                    <form action="{{ route('posts.edit', ['id' => $post->id]) }}" method="get">
+                                    <form action="{{ route('posts.edit', ['id' => $post->id]) }}" method="post">
                                         @csrf
 
                                         <button type="submit" class="btn btn-sm bg-white"><i
